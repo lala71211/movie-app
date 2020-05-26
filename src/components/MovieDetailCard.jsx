@@ -1,9 +1,10 @@
-import React,{ useEffect} from "react";
+import React,{ useEffect,useRef} from "react";
 import { Link } from "react-router-dom";
 import { storage } from "../constants/firebase";
 
 function MovieDetailCard({ movie }) {
-    // const [image, setImage] = useState([]);
+    const refImage = useRef(null);
+    
     useEffect(() => {
       fetchImage();
     }, []);
@@ -15,8 +16,10 @@ function fetchImage() {
   starsRef
     .getDownloadURL()
     .then((url) => {
-      let img = document.querySelector(".avatar");
-      img.src = url;
+      // let img = document.querySelector(".avatar");
+      // img.src = url;
+       refImage.current.src = url;
+      
     })
     .catch((error) => {
       console.log(error);
@@ -46,7 +49,7 @@ function fetchImage() {
       <div className="row">
         <div className="col-12 col-sm-4">
           <div className="card__cover">
-            <img className="avatar" alt="" />
+            <img className="avatar" alt="" ref = {refImage} />
             <Link to={{
               pathname: `movie/${movie.id}/dadas`,
               search: "?search=25"
@@ -94,7 +97,7 @@ function fetchImage() {
             </div>
 
             <div className="card__description">
-              <p>{movie.desc}</p>
+              <p>{movie.overview}</p>
             </div>
           </div>
         </div>

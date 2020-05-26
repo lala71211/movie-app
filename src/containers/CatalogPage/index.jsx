@@ -20,7 +20,7 @@ function CatalogPage(props) {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log("abc")
+  // console.log("abc")
 
  function fetchData(){
   // const genreResponse = await axios.get(`${apiPath}/genre/`);
