@@ -25,7 +25,7 @@ const options = {
     },
   },
 };
-console.log(options)
+// console.log(options)
 // eslint-disable-next-line import/prefer-default-export
 const usePlayer = ({ src, controls, autoplay }) => {
   const videoRef = useRef(null);
@@ -41,7 +41,7 @@ const usePlayer = ({ src, controls, autoplay }) => {
     // console.log(vjsPlayer.sources)
     setPlayer(vjsPlayer);
     // console.log(vjsPlayer)
-    console.log(src)
+    // console.log(src)
     return () => {
       if (player !== null) {
         player.dispose();
