@@ -5,9 +5,8 @@ import MovieDetailCard from "../MovieDetailCard";
 import Accordion from "./Accordion";
 import VideoPlayer from "../VideoPlayer";
 
-function SeriesMovie({ movies,link }) {
+function SeriesMovie({ movies=[],link }) {
   let rs=[]
-  console.log(movies)
   link.sources.map(item=>{
     rs.push({type: "video/mp4",
         src:item.src
