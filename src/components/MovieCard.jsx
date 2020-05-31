@@ -1,14 +1,55 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import { storage } from "../constants/firebase";
 
 function MovieCard({ movie, size = "normal" }) {
+  const refImage = useRef(null);
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+  // console.log(movie)
+  function fetchImage() {
+    let pathReference = storage.refFromURL("gs://movie-app-d4c77.appspot.com/poster");
+    let starsRef = pathReference.child(`${movie.poster}`)
+    // console.log(starsRef)
+    starsRef
+      .getDownloadURL()
+      .then((url) => {
+        // let img = document.querySelector(".avatar");
+        // img.src = url;
+        refImage.current.src = url;
+
+      })
+      .catch((error) => {
+        console.log(error);
+        switch (error.code) {
+          case "storage/object-not-found":
+            break;
+
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect the server response
+            break;
+
+          default:
+            break;
+        }
+      });
+  }
   return (
     <div className={`card ${size === "lg" ? "card--big" : null}`}>
       <div className="card__cover">
-        <img src={movie.poster} alt="" />
+        <img className="avatar" alt="" ref={refImage} />
         <Link to={{
           pathname: `movie/${movie.id}`
         }} className="card__play">

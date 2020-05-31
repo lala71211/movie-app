@@ -5,9 +5,9 @@ import MovieDetailCard from "../MovieDetailCard";
 import Accordion from "./Accordion";
 import VideoPlayer from "../VideoPlayer";
 
-function SeriesMovie({ movie }) {
+function SeriesMovie({ movies=[],link }) {
   let rs=[]
-  movie.sources.map(item=>{
+  link.sources.map(item=>{
     rs.push({type: "video/mp4",
         src:item.src
       })
@@ -19,7 +19,7 @@ function SeriesMovie({ movie }) {
       {/* <!-- end details background --> */}
       <div className="container">
         <Row>
-          <MovieDetailCard single={false} movie={movie} />
+          <MovieDetailCard single={false} movie={movies} />
           {/* <!-- player --> */}
           <div className="col-12 col-xl-6">
             {/* <PlyrPlayer /> */}
