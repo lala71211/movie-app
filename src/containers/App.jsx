@@ -23,10 +23,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" component={HomePage} exact />
-        {/* <Route path="/sign-in" component={SignIn} /> */}
-        {/* <Route path="/sign-up" component={SignUp} /> */}
-        {/* <Route path="/update-account" component={PaidPage} /> */}
-        {/* <Route path="/movie/:id" component={MoveDetailPage} />   */}
+        {/* localhost/tim-kiem?genre=Action+Romance&title=Duong&.... */}
         <Route
           path="/genre/:id/:page"
           render={props => <CatalogPage {...props} />}

@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from "./MovieCard";
+import SimpleCard from "./SimpleCard";
 
 function SideBar({ data }) {
   return (
@@ -17,7 +17,7 @@ function SideBar({ data }) {
         {data.map((item) => {
           return (
             <div className="col-6 col-sm-4 col-lg-6">
-              <MovieCard key={item.id} movie={item} />;
+              <SimpleCard key={item.id} movie={item} />;
             </div>
           );
         })}

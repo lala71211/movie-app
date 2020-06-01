@@ -4,7 +4,24 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { storage } from "../constants/firebase";
 
-function MovieCard({ movie, size = "normal" }) {
+SimpleCard.defaultProps = {
+  movie:{
+    adults: 0,
+    genres: [],
+    imdb: 0,
+    languages: "",
+    nation: "",
+    overview: "",
+    popularity: 0,
+    poster: "",
+    quality: "",
+    release_date: "",
+    runtime: 0,
+    title: "",
+    view: 0
+  }
+}
+function SimpleCard({ movie, size = "normal" }) {
   const refImage = useRef(null);
 
   useEffect(() => {
@@ -51,14 +68,14 @@ function MovieCard({ movie, size = "normal" }) {
       <div className="card__cover">
         <img className="avatar" alt="" ref={refImage} />
         <Link to={{
-          pathname: `movie/${movie.id}`
+          pathname: `/movie/${movie.id}`
         }} className="card__play">
           <i className="icon ion-ios-play"></i>
         </Link>
       </div>
       <div className="card__content">
         <h3 className="card__title">
-          <Link to={`movie/${movie.id}`}>{movie.title}</Link>
+          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
         </h3>
         <span className="card__category">
           {movie.genres.map((genre) => {
@@ -66,7 +83,7 @@ function MovieCard({ movie, size = "normal" }) {
               // <Link to = {`genre/${genre.name}/1`}>{genre.name}</Link>
               <Link
                 to={{
-                  pathname: `genre/${genre.name}/1`,
+                  pathname: `/genre/${genre.name}/1`,
                   // search: "?sort=name",
                   state: { genre: genre }
                 }}
@@ -83,11 +100,11 @@ function MovieCard({ movie, size = "normal" }) {
   );
 }
 
-MovieCard.prototype = {
+SimpleCard.prototype = {
   movie: PropTypes.object.isRequired,
   size: PropTypes.string,
 };
 
 // MovieCard.defaultProps = {};
 
-export default MovieCard;
+export default SimpleCard;

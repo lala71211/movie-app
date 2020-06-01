@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import logo from "../assets/img/logo.svg";
+import SearchBox from "./SearchBox";
+
+
 
 function Header() {
   useEffect(() => {
@@ -48,6 +51,12 @@ function Header() {
       searchBtn.removeEventListener("click");
     };
   }, []);
+
+  function handleSearch(e) {
+    e.preventDefault();
+
+  }
+
 
   return (
     <header className="header">
@@ -201,22 +210,7 @@ function Header() {
       </div>
 
       {/* <!-- header search --> */}
-      <form action="#" className="header__search">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="header__search-content">
-                <input
-                  type="text"
-                  placeholder="Search for a movie, TV Series that you are looking for"
-                />
-
-                <button type="button">search</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+     <SearchBox/>
       {/* <!-- end header search --> */}
     </header>
   );

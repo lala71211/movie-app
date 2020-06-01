@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from "./MovieCard";
+import SimpleCard from "./SimpleCard";
 
 export default function GridList({ movieList }) {
   return (
@@ -7,7 +7,7 @@ export default function GridList({ movieList }) {
       {movieList.map((movie) => {
         return (
           <div className="col-6 col-sm-4 col-lg-3 col-xl-2" key={movie.id}>
-            <MovieCard movie={movie} />
+            <SimpleCard movie={movie} />
           </div>
         );
       })}

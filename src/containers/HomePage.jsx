@@ -3,7 +3,7 @@ import HomeCarousel from "../components/HomeCarousel";
 import { TabItem, Tabs } from "../components/CustomTabs";
 import GridList from "../components/GridList";
 import DetailList from "../components/DetailList";
-// import { detailList, gridList, movieCards, movie } from "../../data";
+// import { detailList, gridList, SimpleCards, movie } from "../../data";
 import { serverPath } from "../constants/const";
 import axios from "axios";
 

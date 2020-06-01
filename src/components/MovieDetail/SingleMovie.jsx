@@ -1,6 +1,6 @@
 import React from "react";
 // import PlyrPlayer from "../../PlyrPlayer";
-import MovieDetailCard from "../MovieDetailCard";
+import DetailCard from "../DetailCard";
 import { Col, Row } from "react-bootstrap";
 // import Plyr from 'react-plyr';
 import VideoPlayer from "../VideoPlayer";
@@ -23,7 +23,7 @@ function SingleMovie({ movie }) {
       {/* <!-- details content --> */}
       <div class="container">
         <Row>
-          <MovieDetailCard single={true} movie={movie} />
+          <DetailCard single={true} movie={movie} />
 
           {/* <!-- player --> */}
           <Col xs={12} xl={6}>

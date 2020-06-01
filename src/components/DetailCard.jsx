@@ -2,13 +2,32 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { storage } from "../constants/firebase";
 
-function MovieDetailCard({ movie }) {
+DetailCard.defaultProps = {
+  movie:{
+    adults: 0,
+    genres: [],
+    imdb: 0,
+    languages: "",
+    nation: "",
+    overview: "",
+    popularity: 0,
+    poster: "",
+    quality: "",
+    release_date: "",
+    runtime: 0,
+    title: "",
+    view: 0
+  }
+}
+function DetailCard({ movie }) {
+
   const refImage = useRef(null);
 
   useEffect(() => {
     fetchImage();
   }, [movie]);
 
+  console.log(movie);
 
   function fetchImage() {
     let pathReference = storage.refFromURL("gs://movie-app-d4c77.appspot.com/poster");
@@ -52,7 +71,7 @@ function MovieDetailCard({ movie }) {
           <div className="card__cover">
             <img className="avatar" alt="" ref={refImage} />
             <Link to={{
-              pathname: `movie/${movie.id}/dadas`,
+              pathname: `/movie/${movie.id}/dadas`,
               search: "?search=25"
             }}
               className="card__play">
@@ -64,19 +83,16 @@ function MovieDetailCard({ movie }) {
         <div className="col-12 col-sm-8">
           <div className="card__content">
             <h3 className="card__title">
-              <Link to={`movie/${movie.id}`}>{movie.title}</Link>
+              <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
             </h3>
             <span className="card__category">
-              {movie.genre != null && movie.genres.map((genre) => {
+              {movie.genres && movie.genres.map((genre) => {
                 return (
-                  // <a href="#" key={genre.id}>
-                  //   {genre.name}
-                  // </a>
+                  
                   <Link
                     to={{
-                      pathname: `genre/${genre.name}/1`,
+                      pathname: `/genre/${genre.name}/1`,
                       // search: "?sort=name",
-                      state: { genre: genre }
                     }}
                   >{genre.name}</Link>
                 );
@@ -107,4 +123,4 @@ function MovieDetailCard({ movie }) {
   );
 }
 
-export default MovieDetailCard;
+export default DetailCard;
