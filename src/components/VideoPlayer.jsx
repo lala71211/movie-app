@@ -41,7 +41,7 @@ const usePlayer = ({ src, controls, autoplay }) => {
     // console.log(vjsPlayer.sources)
     setPlayer(vjsPlayer);
     // console.log(vjsPlayer)
-    // console.log(src)
+    console.log(src)
     return () => {
       if (player !== null) {
         player.dispose();
