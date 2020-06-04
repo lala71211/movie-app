@@ -28,7 +28,7 @@ function SearchBox(props) {
                                 placeholder="Search for a movie, TV Series that you are looking for"
                                 onChange={handleChange}
                             />
-                            <button type="button" onClick={handleSubmit}>search</button>
+                            <button type="button" onClick={handleSubmit}>Tìm</button>
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,7 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-function FilterMovie({ genreList, qualities, onSearch }) {
+function FilterMovie({ genreList, qualities, props }) {
   const [searchGenres, setsearchGenres] = useState([]);
   const [quality, setQuality] = useState([]);
   const [imdb, setImdb] = useState([0, 0]);
@@ -106,6 +106,7 @@ function FilterMovie({ genreList, qualities, onSearch }) {
           searchTerm += years[i]
       }
     }
+    props.history.push({ pathname: `/tim-kiem?advance=${searchTerm}` });
   }
 
   return (
@@ -242,7 +243,7 @@ function FilterMovie({ genreList, qualities, onSearch }) {
 
               {/* <!-- filter btn --> */}
               <button className="filter__btn" type="button" onClick={handleSubmit}>
-                apply filter
+                Tìm kiếm
               </button>
               {/* <!-- end filter btn --> */}
             </div>

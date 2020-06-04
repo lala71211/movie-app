@@ -8,7 +8,7 @@ function SideBar({ data }) {
         {/* <!-- section title --> */}
         <div className="col-12">
           <h2 className="section__title section__title--sidebar">
-            You may also like...
+            Có thể bạn sẽ thích
           </h2>
         </div>
         {/* <!-- end section title --> */}

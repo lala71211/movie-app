@@ -14,7 +14,7 @@ const apiPath = `${serverPath}/api`;
 
 
 function MoveDetailPage(props) {
-  console.log(props)
+  // console.log(props)
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {

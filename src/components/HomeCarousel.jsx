@@ -66,7 +66,7 @@ function HomeCarousel({ movies }) {
         <div className="row">
           <div className="col-12">
             <h1 className="home__title">
-              <b>NEW ITEMS</b> OF THIS SEASON
+              <b>Phim mới</b> của mùa
             </h1>
 
             <button

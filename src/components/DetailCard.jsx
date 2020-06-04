@@ -27,7 +27,7 @@ function DetailCard({ movie }) {
     fetchImage();
   }, [movie]);
 
-  console.log(movie);
+  // console.log(movie);
 
   function fetchImage() {
     let pathReference = storage.refFromURL("gs://movie-app-d4c77.appspot.com/poster");

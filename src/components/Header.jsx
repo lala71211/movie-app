@@ -84,7 +84,7 @@ function Header() {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Home
+                      Trang chủ
                     </a>
 
                     <ul
@@ -112,7 +112,7 @@ function Header() {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Genre
+                      Thể loại
                     </a>
 
                     <ul
@@ -137,18 +137,13 @@ function Header() {
 
                   <li className="header__nav-item">
                     <a href="/update-account" className="header__nav-link">
-                      Pricing Plan
+                      Nâng cấp tài khoản
                     </a>
                   </li>
-
-                  <li className="header__nav-item">
-                    <a href="faq.html" className="header__nav-link">
-                      Help
-                    </a>
-                  </li>
+          
 
                   {/* <!-- dropdown --> */}
-                  <li className="dropdown header__nav-item">
+                  {/* <li className="dropdown header__nav-item">
                     <a
                       className="dropdown-toggle header__nav-link header__nav-link--more"
                       href="#"
@@ -178,7 +173,7 @@ function Header() {
                         <a href="404.html">404 Page</a>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                   {/* <!-- end dropdown --> */}
                 </ul>
                 {/* <!-- end header nav --> */}
@@ -191,7 +186,7 @@ function Header() {
 
                   <a href="/sign-in" className="header__sign-in">
                     <i className="icon ion-ios-log-in"></i>
-                    <span>sign in</span>
+                    <span>Đăng Nhập</span>
                   </a>
                 </div>
                 {/* <!-- end header auth --> */}

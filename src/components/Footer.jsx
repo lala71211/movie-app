@@ -10,7 +10,7 @@ function Footer() {
         <div className="row">
           {/* <!-- footer list --> */}
           <div className="col-12 col-md-3">
-            <h6 className="footer__title">Download Our App</h6>
+            <h6 className="footer__title">Tải ứng dụng của chúng tôi</h6>
             <ul className="footer__app">
               <li>
                 <a href="#">
@@ -31,13 +31,13 @@ function Footer() {
             <h6 className="footer__title">Resources</h6>
             <ul className="footer__list">
               <li>
-                <a href="#">About Us</a>
+                <a href="#">Về chúng tôi</a>
               </li>
               <li>
-                <a href="#">Pricing Plan</a>
+                <a href="/update-account">Nâng cấp tài khoản</a>
               </li>
               <li>
-                <a href="#">Help</a>
+                <a href="#">Trợ giúp</a>
               </li>
             </ul>
           </div>
@@ -45,16 +45,16 @@ function Footer() {
 
           {/* <!-- footer list --> */}
           <div className="col-6 col-sm-4 col-md-3">
-            <h6 className="footer__title">Legal</h6>
+            <h6 className="footer__title">Chính sách pháp lý</h6>
             <ul className="footer__list">
               <li>
-                <a href="#">Terms of Use</a>
+                <a href="#">Điều khoản sử dụng</a>
               </li>
               <li>
-                <a href="#">Privacy Policy</a>
+                <a href="#">Chính sách bảo mật</a>
               </li>
               <li>
-                <a href="#">Security</a>
+                <a href="#">Bảo vệ tài khoản</a>
               </li>
             </ul>
           </div>
@@ -62,10 +62,10 @@ function Footer() {
 
           {/* <!-- footer list --> */}
           <div className="col-12 col-sm-4 col-md-3">
-            <h6 className="footer__title">Contact</h6>
+            <h6 className="footer__title">Liên hệ</h6>
             <ul className="footer__list">
               <li>
-                <a href="tel:+18002345678">+1 (800) 234-5678</a>
+                <a href="tel:+18002345678">(+84) 33 264 70 55</a>
               </li>
               <li>
                 <a href="mailto:support@moviego.com">support@flixgo.com</a>

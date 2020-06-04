@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { storage } from "../constants/firebase";
 
 SimpleCard.defaultProps = {
-  movie:{
+  movie: {
     adults: 0,
     genres: [],
     imdb: 0,
