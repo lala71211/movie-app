@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 function SearchBox(props) {
     const [searchTerm, setSearchTerm] = useState("");
-
+  
     function handleSubmit(e) {
         console.log("submit")
         e.preventDefault();
@@ -25,7 +25,7 @@ function SearchBox(props) {
                         <div className="header__search-content">
                             <input
                                 type="text"
-                                placeholder="Search for a movie, TV Series that you are looking for"
+                                placeholder="Nhập tên bộ phim cần tìm"
                                 onChange={handleChange}
                             />
                             <button type="button" onClick={handleSubmit}>Tìm</button>

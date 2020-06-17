@@ -8,9 +8,10 @@ import VideoPlayer from "../VideoPlayer";
 function SeriesMovie({ movies=[],link }) {
   let rs=[]
   link.sources.map(item=>{
-    rs.push({
-        src:item.src
-      })
+    rs.push(
+      item.src
+    )
+      // console.log(item.src)
       // type: "video/mp4",
 })
   return (
