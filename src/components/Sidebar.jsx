@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from "./MovieCard";
+import SimpleCard from "./SimpleCard";
 
 function SideBar({ data }) {
   return (
@@ -8,7 +8,7 @@ function SideBar({ data }) {
         {/* <!-- section title --> */}
         <div className="col-12">
           <h2 className="section__title section__title--sidebar">
-            You may also like...
+            Có thể bạn sẽ thích
           </h2>
         </div>
         {/* <!-- end section title --> */}
@@ -17,7 +17,7 @@ function SideBar({ data }) {
         {data.map((item) => {
           return (
             <div className="col-6 col-sm-4 col-lg-6">
-              <MovieCard key={item.id} movie={item} />;
+              <SimpleCard key={item.id} movie={item} />;
             </div>
           );
         })}

@@ -38,7 +38,7 @@ function SignUp() {
                     <input
                       type="text"
                       className="sign__input"
-                      placeholder="Name"
+                      placeholder="Tên"
                     />
                   </div>
 
@@ -46,7 +46,7 @@ function SignUp() {
                     <input
                       type="text"
                       className="sign__input"
-                      placeholder="Email"
+                      placeholder="Tài khoản"
                     />
                   </div>
 
@@ -54,7 +54,7 @@ function SignUp() {
                     <input
                       type="password"
                       className="sign__input"
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                     />
                   </div>
 
@@ -66,16 +66,16 @@ function SignUp() {
                       checked="checked"
                     />
                     <label htmlFor="remember">
-                      I agree to the <a href="#">Privacy Policy</a>
+                      Tôi đồng ý với <a href="#">Chính sách Bảo mật</a>
                     </label>
                   </div>
 
                   <button className="sign__btn" type="button">
-                    Sign up
+                      Đăng ký
                   </button>
 
                   <span className="sign__text">
-                    Already have an account? <a href="/sign-in">Sign in!</a>
+                    Đã có tài khoản? <a href="/sign-in">Đăng nhập</a>
                   </span>
                 </form>
                 {/* <!-- registration form --> */}

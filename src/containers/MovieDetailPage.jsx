@@ -13,8 +13,8 @@ import axios from "axios";
 const apiPath = `${serverPath}/api`;
 
 
-function MoveDetailPage() {
-
+function MoveDetailPage(props) {
+  // console.log(props)
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function MoveDetailPage() {
   }, []);
 
   function fetchData() {
-    axios.get(`${apiPath}/movie/5`)
+  axios.get(`${apiPath}/movie/${props.match.params.id}`)
       .then(res =>
         setMovie(res.data)
       )
@@ -46,7 +46,7 @@ function MoveDetailPage() {
           <ReviewList></ReviewList>
         </TabItem>
         <TabItem label="Photo">
-          <Gallery></Gallery>
+          <Gallery ></Gallery>
         </TabItem>
       </Tabs>
     </React.Fragment>

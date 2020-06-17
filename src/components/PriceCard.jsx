@@ -13,7 +13,7 @@ export default function PriceCard({ id, title, price, ...options }) {
             return (
               <div className="price__item" key={index}>
                 <span>
-                  {options[key] === true ? "24/7 Support" : "Limited Support"}
+                  {options[key] === true ? "Hỗ trợ 24/7" : "Hỗ trợ giới hạn"}
                 </span>
               </div>
             );
@@ -26,7 +26,7 @@ export default function PriceCard({ id, title, price, ...options }) {
           }
         })}
         <a href="#" className="price__btn">
-          Choose Plan
+          Thanh Toán
         </a>
       </div>
     </div>

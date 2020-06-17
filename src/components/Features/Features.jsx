@@ -10,7 +10,7 @@ export default function Features() {
           {/* <!-- section title --> */}
           <div className="col-12">
             <h2 className="section__title section__title--no-margin">
-              Our Features
+              Các tính năng của chúng tôi
             </h2>
           </div>
           {/* <!-- end section title --> */}
@@ -27,7 +27,7 @@ export default function Features() {
             );
           })}
           {/* <!-- end feature --> */}
-          
+
         </div>
       </div>
     </section>

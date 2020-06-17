@@ -38,7 +38,7 @@ function SignIn() {
                     <input
                       type="text"
                       className="sign__input"
-                      placeholder="Email"
+                      placeholder="Tài khoản"
                     />
                   </div>
 
@@ -46,7 +46,7 @@ function SignIn() {
                     <input
                       type="password"
                       className="sign__input"
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                     />
                   </div>
 
@@ -57,19 +57,19 @@ function SignIn() {
                       type="checkbox"
                       checked="checked"
                     />
-                    <label htmlFor="remember">Remember Me</label>
+                    <label htmlFor="remember">Lưu đăng nhập</label>
                   </div>
 
                   <button className="sign__btn" type="button">
-                    Sign in
+                    Đăng nhập
                   </button>
 
                   <span className="sign__text">
-                    Don't have an account? <a href="/sign-up">Sign up!</a>
+                    Không có tài khoản? <a href="/sign-up">Đăng ký!</a>
                   </span>
 
                   <span className="sign__text">
-                    <a href="#">Forgot password?</a>
+                    <a href="#">Quên mật khẩu?</a>
                   </span>
                 </form>
                 {/* <!-- end authorization form --> */}

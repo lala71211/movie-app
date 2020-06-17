@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 // import PropTypes from "prop-types";
-import MovieCard from "./MovieCard";
+import SimpleCard from "./SimpleCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -66,7 +66,7 @@ function HomeCarousel({ movies }) {
         <div className="row">
           <div className="col-12">
             <h1 className="home__title">
-              <b>NEW ITEMS</b> OF THIS SEASON
+              <b>Phim mới</b> của mùa
             </h1>
 
             <button
@@ -88,7 +88,7 @@ function HomeCarousel({ movies }) {
           <div className="col-12">
             <Slider className="home__carousel" {...settings} ref={sliderEl}>
               {movies.map((movie) => {
-                return <MovieCard movie={movie} size="lg" key={movie.id}  />;
+                return <SimpleCard movie={movie} size="lg" key={movie.id}  />;
               })}
             </Slider>
           </div>

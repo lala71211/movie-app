@@ -7,16 +7,16 @@ import 'video.js/dist/video-js.css';
 const options = {
   fill: true,
   fluid: true,
-  preload: 'auto',  
+  preload: 'auto',
   controlBar: {
     children: [
-       'playToggle',
-       'progressControl',
-       'volumePanel',
-       'qualitySelector',
-       'fullscreenToggle',
+      'playToggle',
+      'progressControl',
+      'volumePanel',
+      'qualitySelector',
+      'fullscreenToggle',
     ],
- },
+  },
   html5: {
     hls: {
       enableLowInitialPlaylist: true,
@@ -25,23 +25,30 @@ const options = {
     },
   },
 };
+
 // console.log(options)
 // eslint-disable-next-line import/prefer-default-export
-const usePlayer = ({ src, controls, autoplay }) => {
+
+const usePlayer = ({ src, controls, autoplay, fluid }) => {
+  const [Time, setTime] = useState(null);
   const videoRef = useRef(null);
   const [player, setPlayer] = useState(null);
+  
   useEffect(() => {
     const vjsPlayer = videojs(videoRef.current, {
       ...options,
+      fluid,
       controls,
       autoplay,
-      // sources: {src,type: 'video/mp4' },
-      sources:src
+      sources: src
     });
-    // console.log(vjsPlayer.sources)
+
     setPlayer(vjsPlayer);
-    // console.log(vjsPlayer)
-    console.log(src)
+    if (player !== null) {
+      player.on("timeupdate", () => {
+        setTime(player.currentTime());
+      });
+    }
     return () => {
       if (player !== null) {
         player.dispose();
@@ -51,24 +58,29 @@ const usePlayer = ({ src, controls, autoplay }) => {
 
   useEffect(() => {
     if (player !== null) {
-        // console.log("sources not null");
-      player.src({ src});
+
+      player.src({ src });
+
     }
   }, [src]);
-  // console.log(videoRef)
+  // console.log(videoRef.current.currentTime);
+
   return videoRef;
+  
 };
+
 
 const VideoPlayer = ({ src, controls, autoplay, options }) => {
   const playerRef = usePlayer({ src, controls, autoplay, options });
 
+  console.log(playerRef.current)
+
   return (
     <div data-vjs-player>
-      <video ref={playerRef} className="video-js" />
+      <video ref={playerRef} className="video-js"/>
     </div>
   );
 };
-
 
 VideoPlayer.propTypes = {
   src: PropTypes.string.isRequired,
@@ -80,7 +92,8 @@ VideoPlayer.propTypes = {
 VideoPlayer.defaultProps = {
   controls: true,
   autoplay: false,
-  options: true
+  options: true,
+  fluid: true,
 };
 
 export default VideoPlayer;

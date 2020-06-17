@@ -22,6 +22,11 @@ function CatalogPage(props) {
   }, []);
   // console.log("abc")
 
+  function searchMovie(searchTerm){
+    // axios.get(`${apiPath/movie/advanced?=}`)
+    console.log(searchTerm)
+  }
+
  function fetchData(){
   // const genreResponse = await axios.get(`${apiPath}/genre/`);
   axios.get(`${apiPath}/movie/?pageSize=6&currentPage=1`)
@@ -37,7 +42,7 @@ function CatalogPage(props) {
   return (
     <React.Fragment>
       <PageTitle title="Tìm Kiếm" location="Tìm Kiếm" />
-      <FilterMovie qualities={qualityList} genreList={genres} />
+      <FilterMovie qualities={qualityList} genreList={genres} onSearch={searchMovie}/>
       <CatalogList movieList={movies} />
     </React.Fragment>
   );
