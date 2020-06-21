@@ -28,6 +28,10 @@ function App() {
           path="/genre/:id/:page"
           render={props => <CatalogPage {...props} />}
         />
+        {/* <Route
+          path="/timkiem?title=:searchTerm"
+          render={props => <CatalogPage {...props} />}
+        /> */}
         <Route
           path="/movie/:id"
           render={props => <MoveDetailPage {...props} />}

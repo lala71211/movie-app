@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import "../../css/plyr.css";
 import Plyr from "plyr";
 import PropTypes from "prop-types";
 
 function PlyrPlayer(props) {
+  const [currentTime, setCurrentTime] = useState(null);
   useEffect(() => {
     let player = new Plyr("#player", props.options);
     player.source = props.sources;
+    player.on("timeupdate", () => {
+      setCurrentTime(player.currentTime());
+    });
     return () => {
       player.destroy();
     };
   }, []);
-
+  document.cookie = "time=" + currentTime;
+  console.log(currentTime);
   return (
     <video id="player" crossorigin playsinline className="js-plyr plyr"></video>
   );

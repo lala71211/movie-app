@@ -4,6 +4,7 @@ import { Dropdown } from "react-bootstrap";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.min.css";
 import wNumb from "wnumb";
+import { withRouter } from "react-router-dom";
 
 import $ from "jquery";
 import "malihu-custom-scrollbar-plugin";
@@ -36,12 +37,13 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-function FilterMovie({ genreList, qualities, props }) {
+function FilterMovie({ genreList, qualities, ...props }) {
   const [searchGenres, setsearchGenres] = useState([]);
   const [quality, setQuality] = useState([]);
   const [imdb, setImdb] = useState([0, 0]);
   const [years, setYears] = useState([1990, 2020]);
 
+  // console.log(props);
   // console.log(genreList);
   function handleMenuItemClick(e) {
     let menuId = e.target.closest(".filter__item").getAttribute("id");
@@ -68,7 +70,8 @@ function FilterMovie({ genreList, qualities, props }) {
     sliders[index][handle].innerHTML = value[handle];
   };
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     let searchTerm = "";
     if (searchGenres.length > 0) {
       searchTerm += "genre="
@@ -118,7 +121,7 @@ function FilterMovie({ genreList, qualities, props }) {
               <div className="filter__items">
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__genre">
-                  <span className="filter__item-label">GENRE:</span>
+                  <span className="filter__item-label">THỂ LOẠI:</span>
 
                   <Dropdown.Toggle
                     // as="div"
@@ -152,7 +155,7 @@ function FilterMovie({ genreList, qualities, props }) {
 
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__quality">
-                  <span className="filter__item-label">QUALITY:</span>
+                  <span className="filter__item-label">CHẤT LƯỢNG:</span>
 
                   <Dropdown.Toggle
                     className="filter__item-btn"
@@ -212,7 +215,7 @@ function FilterMovie({ genreList, qualities, props }) {
 
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__year">
-                  <span className="filter__item-label">RELEASE YEAR:</span>
+                  <span className="filter__item-label">NĂM PHÁT HÀNH:</span>
 
                   <Dropdown.Toggle
                     className="filter__item-btn "
@@ -256,4 +259,4 @@ function FilterMovie({ genreList, qualities, props }) {
 
 FilterMovie.propTypes = {};
 
-export default FilterMovie;
+export default withRouter(FilterMovie);

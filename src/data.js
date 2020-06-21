@@ -355,9 +355,10 @@ const movie = {
     release: "2017",
     time: 100,
     sources: [{ id: 1, src: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4" },
-    { id: 2, src: "https://www.googleapis.com/drive/v3/files/1N4Y4zfOHH_Et7Z1swNz_Rz2LzsUiLmNV?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" },
-    { id: 3, src: "https://www.googleapis.com/drive/v3/files/1BNHG5VIzLtOEx6rQV8o4O-yT6omnNT6L?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" },
-    { id: 4, src: "https://www.googleapis.com/drive/v3/files/14DQBuKPBapfRmu7GxihTd7PR6u_89H2-?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" }]
+    { id: 2, src: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" },
+    { id: 3, src: "https://www.googleapis.com/drive/v3/files/1N4Y4zfOHH_Et7Z1swNz_Rz2LzsUiLmNV?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" },
+    { id: 4, src: "https://www.googleapis.com/drive/v3/files/1BNHG5VIzLtOEx6rQV8o4O-yT6omnNT6L?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" },
+    { id: 5, src: "https://www.googleapis.com/drive/v3/files/14DQBuKPBapfRmu7GxihTd7PR6u_89H2-?alt=media&key=AIzaSyDfmnew541jCJhtv10z4R6pKDg1CdkMXOA" }]
 }
 
 const qualities = [{ id: 1, name: "HD" }, { id: 2, name: "SD" }, { id: 3, name: "Full HD" }, { id: 4, name: "All" }];

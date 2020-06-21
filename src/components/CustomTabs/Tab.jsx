@@ -25,7 +25,7 @@ function CustomTabs({ activeTab, children, ...props }) {
           <div className="container">
             <Row>
               <Col xs={12}>
-                <h2 className="content__title">New items</h2>
+                <h2 className="content__title">Phim Mới</h2>
 
                 <Nav varian="tabs" className="content__tabs">
                   {children.map((child, index) => {

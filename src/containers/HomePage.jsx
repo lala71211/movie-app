@@ -22,17 +22,17 @@ function HomePage(props) {
   return (
     <React.Fragment>
       <HomeCarousel movies={movies} />
-      <Tabs activeTab="New Releases">
-        <TabItem label="New Releases">
+      <Tabs activeTab="Bản phát hành mới">
+        <TabItem label="Bản phát hành mới">
           <DetailList movieList={movies} />
         </TabItem>
-        <TabItem label="Movies">
+        <TabItem label="Phim Lẻ">
           <GridList movieList={movies} />
         </TabItem>
-        <TabItem label="TV Series">
+        <TabItem label="Phim Dài Tập">
           <GridList movieList={movies} />
         </TabItem>
-        <TabItem label="Cartoons">
+        <TabItem label="Phim Hoạt Hình">
           <GridList movieList={movies} />
         </TabItem>
       </Tabs>
