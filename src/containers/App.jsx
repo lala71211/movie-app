@@ -1,21 +1,21 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Header from "../../components/Header";
-import SignIn from "../SignIn";
-import SignUp from "../SignUp";
-import PaidPage from "../PaidPage";
-import ErrorPage from "../ErrorPage";
-import Footer from "../../components/Footer";
-import MoveDetailPage from "../MovieDetailPage";
-import HomePage from "../HomePage";
-import CatalogPage from "../CatalogPage";
+import Header from "../components/Header";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import PaidPage from "./PaidPage";
+import ErrorPage from "./ErrorPage";
+import Footer from "../components/Footer";
+import MoveDetailPage from "./MovieDetailPage";
+import HomePage from "./HomePage";
+import CatalogPage from "./CatalogPage";
 
 
-import "../../assets/css/bootstrap-reboot.min.css";
-import "../../assets/css/bootstrap-grid.min.css";
-import "../../assets/css/ionicons.min.css";
-import "../../assets/css/main.css";
+import "../assets/css/bootstrap-reboot.min.css";
+import "../assets/css/bootstrap-grid.min.css";
+import "../assets/css/ionicons.min.css";
+import "../assets/css/main.css";
 
 function App() {
   return (
@@ -23,14 +23,15 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" component={HomePage} exact />
-        {/* <Route path="/sign-in" component={SignIn} /> */}
-        {/* <Route path="/sign-up" component={SignUp} /> */}
-        {/* <Route path="/update-account" component={PaidPage} /> */}
-        {/* <Route path="/movie/:id" component={MoveDetailPage} />   */}
+        {/* localhost/tim-kiem?genre=Action+Romance&title=Duong&.... */}
         <Route
           path="/genre/:id/:page"
           render={props => <CatalogPage {...props} />}
         />
+        {/* <Route
+          path="/timkiem?title=:searchTerm"
+          render={props => <CatalogPage {...props} />}
+        /> */}
         <Route
           path="/movie/:id"
           render={props => <MoveDetailPage {...props} />}

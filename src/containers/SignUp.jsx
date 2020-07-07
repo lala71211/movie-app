@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import logo from "../../assets/img/logo.svg";
-import bgImg from "../../assets/img/section/section.jpg";
+import logo from "../assets/img/logo.svg";
+import bgImg from "../assets/img/section/section.jpg";
 
-function SignIn() {
+function SignUp() {
   useEffect(() => {
     /*==============================
               Section bg
@@ -28,7 +28,7 @@ function SignIn() {
           <div className="row">
             <div className="col-12">
               <div className="sign__content">
-                {/* <!-- authorization form --> */}
+                {/* <!-- registration form --> */}
                 <form action="#" className="sign__form">
                   <a href="index.html" className="sign__logo">
                     <img src={logo} alt="" />
@@ -38,7 +38,15 @@ function SignIn() {
                     <input
                       type="text"
                       className="sign__input"
-                      placeholder="Email"
+                      placeholder="Tên"
+                    />
+                  </div>
+
+                  <div className="sign__group">
+                    <input
+                      type="text"
+                      className="sign__input"
+                      placeholder="Tài khoản"
                     />
                   </div>
 
@@ -46,7 +54,7 @@ function SignIn() {
                     <input
                       type="password"
                       className="sign__input"
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                     />
                   </div>
 
@@ -57,22 +65,20 @@ function SignIn() {
                       type="checkbox"
                       checked="checked"
                     />
-                    <label htmlFor="remember">Remember Me</label>
+                    <label htmlFor="remember">
+                      Tôi đồng ý với <a href="#">Chính sách Bảo mật</a>
+                    </label>
                   </div>
 
                   <button className="sign__btn" type="button">
-                    Sign in
+                      Đăng ký
                   </button>
 
                   <span className="sign__text">
-                    Don't have an account? <a href="/sign-up">Sign up!</a>
-                  </span>
-
-                  <span className="sign__text">
-                    <a href="#">Forgot password?</a>
+                    Đã có tài khoản? <a href="/sign-in">Đăng nhập</a>
                   </span>
                 </form>
-                {/* <!-- end authorization form --> */}
+                {/* <!-- registration form --> */}
               </div>
             </div>
           </div>
@@ -82,4 +88,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

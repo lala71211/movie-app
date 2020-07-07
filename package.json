@@ -25,8 +25,11 @@
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-slick": "^0.25.2",
+    "silvermine-videojs-quality-selector": "^1.1.2",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0",
+    "videojs-playtime": "^1.0.1",
+    "videojs-youtube": "^2.6.1",
     "wnumb": "^1.2.0"
   },
   "scripts": {

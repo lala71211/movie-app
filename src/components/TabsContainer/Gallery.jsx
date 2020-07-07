@@ -1,6 +1,6 @@
 import React from "react";
 
-function Gallery() {
+function Gallery(photos) {
   return (
     <div className="gallery" itemscope>
       <div className="row">

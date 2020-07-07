@@ -30,7 +30,7 @@ export default function PageTitle({ title, location }) {
               {/* <!-- breadcrumb --> */}
               <ul className="breadcrumb">
                 <li className="breadcrumb__item">
-                  <a href="/">Home</a>
+                  <a href="/">Trang chủ</a>
                 </li>
                 <li className="breadcrumb__item breadcrumb__item--active">
                   {location}

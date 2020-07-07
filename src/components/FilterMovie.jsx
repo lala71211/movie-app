@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.min.css";
 import wNumb from "wnumb";
+import { withRouter } from "react-router-dom";
 
 import $ from "jquery";
 import "malihu-custom-scrollbar-plugin";
@@ -36,7 +37,13 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-function FilterMovie({ genreList, qualities }) {
+function FilterMovie({ genreList, qualities, ...props }) {
+  const [searchGenres, setsearchGenres] = useState([]);
+  const [quality, setQuality] = useState([]);
+  const [imdb, setImdb] = useState([0, 0]);
+  const [years, setYears] = useState([1990, 2020]);
+
+  // console.log(props);
   // console.log(genreList);
   function handleMenuItemClick(e) {
     let menuId = e.target.closest(".filter__item").getAttribute("id");
@@ -63,6 +70,48 @@ function FilterMovie({ genreList, qualities }) {
     sliders[index][handle].innerHTML = value[handle];
   };
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    let searchTerm = "";
+    if (searchGenres.length > 0) {
+      searchTerm += "genre="
+      for (let i = 0; i < searchGenres.length; i++) {
+        if (i !== searchGenres.length - 1)
+          searchTerm += searchGenres[i] + "+"
+        else
+          searchTerm += searchGenres[i]
+      }
+    }
+    if (quality.length > 0) {
+      searchTerm += "quality="
+      for (let i = 0; i < quality.length; i++) {
+        if (i !== quality.length - 1)
+          searchTerm += quality[i] + "+"
+        else
+          searchTerm += quality[i]
+      }
+    }
+    if (imdb.length > 0) {
+      searchTerm += "imdb="
+      for (let i = 0; i < imdb.length; i++) { 
+        if (i !== imdb.length - 1)
+          searchTerm += imdb[i] + "-"
+        else
+          searchTerm += imdb[i]
+      }
+    }
+    if (years.length > 0) {
+      searchTerm += "years="
+      for (let i = 0; i < years.length; i++) {
+        if (i !== years.length - 1)
+          searchTerm += years[i] + "-"
+        else
+          searchTerm += years[i]
+      }
+    }
+    props.history.push({ pathname: `/tim-kiem?advance=${searchTerm}` });
+  }
+
   return (
     <div className="filter">
       <div className="container">
@@ -72,16 +121,16 @@ function FilterMovie({ genreList, qualities }) {
               <div className="filter__items">
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__genre">
-                  <span className="filter__item-label">GENRE:</span>
+                  <span className="filter__item-label">THỂ LOẠI:</span>
 
                   <Dropdown.Toggle
                     // as="div"
                     className="filter__item-btn"
-                    // role="navigation"
-                    // id="filter-genre"
-                    // data-toggle="dropdown"
-                    // aria-haspopup="true"
-                    // aria-expanded="false"
+                  // role="navigation"
+                  // id="filter-genre"
+                  // data-toggle="dropdown"
+                  // aria-haspopup="true"
+                  // aria-expanded="false"
                   >
                     <input type="button" value="Action/Adventure" />
                     <span></span>
@@ -106,7 +155,7 @@ function FilterMovie({ genreList, qualities }) {
 
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__quality">
-                  <span className="filter__item-label">QUALITY:</span>
+                  <span className="filter__item-label">CHẤT LƯỢNG:</span>
 
                   <Dropdown.Toggle
                     className="filter__item-btn"
@@ -143,7 +192,7 @@ function FilterMovie({ genreList, qualities }) {
                     id="filter__rate"
                   >
                     <div className="filter__range">
-                    <div id="filter__imbd-start">2.5</div>
+                      <div id="filter__imbd-start">2.5</div>
                       <div id="filter__imbd-end" >8.6</div>
                     </div>
                     <span></span>
@@ -166,7 +215,7 @@ function FilterMovie({ genreList, qualities }) {
 
                 {/* <!-- filter item --> */}
                 <Dropdown className="filter__item" id="filter__year">
-                  <span className="filter__item-label">RELEASE YEAR:</span>
+                  <span className="filter__item-label">NĂM PHÁT HÀNH:</span>
 
                   <Dropdown.Toggle
                     className="filter__item-btn "
@@ -196,8 +245,8 @@ function FilterMovie({ genreList, qualities }) {
               </div>
 
               {/* <!-- filter btn --> */}
-              <button className="filter__btn" type="button">
-                apply filter
+              <button className="filter__btn" type="button" onClick={handleSubmit}>
+                Tìm kiếm
               </button>
               {/* <!-- end filter btn --> */}
             </div>
@@ -210,4 +259,4 @@ function FilterMovie({ genreList, qualities }) {
 
 FilterMovie.propTypes = {};
 
-export default FilterMovie;
+export default withRouter(FilterMovie);

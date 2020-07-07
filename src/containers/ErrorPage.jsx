@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import bgImg from "../../assets/img/section/section.jpg";
+import bgImg from "../assets/img/section/section.jpg";
 
 function ErrorPage() {
   useEffect(() => {

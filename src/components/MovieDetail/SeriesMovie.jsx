@@ -1,16 +1,18 @@
 import React from "react";
 // import PlyrPlayer from "../../PlyrPlayer";
 import { Row, Col } from "react-bootstrap";
-import MovieDetailCard from "../MovieDetailCard";
+import DetailCard from "../DetailCard";
 import Accordion from "./Accordion";
 import VideoPlayer from "../VideoPlayer";
 
-function SeriesMovie({ movie }) {
+function SeriesMovie({ movies=[],link }) {
   let rs=[]
-  movie.sources.map(item=>{
-    rs.push({type: "video/mp4",
-        src:item.src
-      })
+  link.sources.map(item=>{
+    rs.push(
+      item.src
+    )
+      // console.log(item.src)
+      // type: "video/mp4",
 })
   return (
     <section className="section details">
@@ -19,7 +21,7 @@ function SeriesMovie({ movie }) {
       {/* <!-- end details background --> */}
       <div className="container">
         <Row>
-          <MovieDetailCard single={false} movie={movie} />
+          <DetailCard single={false} movie={movies} />
           {/* <!-- player --> */}
           <div className="col-12 col-xl-6">
             {/* <PlyrPlayer /> */}

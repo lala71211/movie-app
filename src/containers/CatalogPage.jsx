@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PageTitle from "../../components/PageTitle";
-import FilterMovie from "../../components/FilterMovie";
+import PageTitle from "../components/PageTitle";
+import FilterMovie from "../components/FilterMovie";
 
 import {
   // genres as genreList,
   qualities as qualityList,
   // detailList,
-} from "../../data";
-import CatalogList from "../../components/CatalogList";
-import { serverPath } from "../../constants/const";
+} from "../data";
+import CatalogList from "../components/CatalogList";
+import { serverPath } from "../constants/const";
 
 const apiPath = `${serverPath}/api`
 
@@ -20,7 +20,12 @@ function CatalogPage(props) {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log("abc")
+  // console.log("abc")
+
+  function searchMovie(searchTerm){
+    // axios.get(`${apiPath/movie/advanced?=}`)
+    console.log(searchTerm)
+  }
 
  function fetchData(){
   // const genreResponse = await axios.get(`${apiPath}/genre/`);
@@ -37,7 +42,7 @@ function CatalogPage(props) {
   return (
     <React.Fragment>
       <PageTitle title="Tìm Kiếm" location="Tìm Kiếm" />
-      <FilterMovie qualities={qualityList} genreList={genres} />
+      <FilterMovie qualities={qualityList} genreList={genres} onSearch={searchMovie}/>
       <CatalogList movieList={movies} />
     </React.Fragment>
   );

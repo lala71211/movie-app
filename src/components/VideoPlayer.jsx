@@ -1,87 +1,90 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+// import { Cookies } from 'react-cookie';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import '../assets/css/video.css';
+// import { instanceOf } from 'prop-types';
+// import PropTypes from "prop-types";
+export default function VideoPlayer({ src }) {
+  require('silvermine-videojs-quality-selector')(videojs);
 
+  const videoPlayerRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(null);
+  const options = {
+    autoplay: false,
+    controls: true,
+    userActions: { hotkeys: true },
+    playbackRates: [0.5, 1, 1.5, 2],
+  };
 
-const options = {
-  fill: true,
-  fluid: true,
-  preload: 'auto',  
-  controlBar: {
+  videojs.getComponent('ControlBar').prototype.options_ = {
+    loadEvent: 'play',
     children: [
-       'playToggle',
-       'progressControl',
-       'volumePanel',
-       'qualitySelector',
-       'fullscreenToggle',
-    ],
- },
-  html5: {
-    hls: {
-      enableLowInitialPlaylist: true,
-      smoothQualityChange: true,
-      overrideNative: true,
-    },
-  },
-};
-console.log(options)
-// eslint-disable-next-line import/prefer-default-export
-const usePlayer = ({ src, controls, autoplay }) => {
-  const videoRef = useRef(null);
-  const [player, setPlayer] = useState(null);
-  useEffect(() => {
-    const vjsPlayer = videojs(videoRef.current, {
-      ...options,
-      controls,
-      autoplay,
-      // sources: {src,type: 'video/mp4' },
-      sources:src
-    });
-    // console.log(vjsPlayer.sources)
-    setPlayer(vjsPlayer);
-    // console.log(vjsPlayer)
-    console.log(src)
-    return () => {
-      if (player !== null) {
-        player.dispose();
-      }
-    };
-  }, []);
+      'playToggle',
+      'volumePanel',
+      'currentTimeDisplay',
+      'timeDivider',
+      'durationDisplay',
+      'progressControl',
+      'liveDisplay',
+      'seekToLive',
+      'remainingTimeDisplay',
+      'customControlSpacer',
+      'playbackRateMenuButton',
+      'chaptersButton',
+      'descriptionsButton',
+      'subsCapsButton',
+      'audioTrackButton',
+      'fullscreenToggle'
+    ]
+  }
 
   useEffect(() => {
-    if (player !== null) {
-        // console.log("sources not null");
-      player.src({ src});
+    if (videoPlayerRef) {
+
+      const player = videojs(videoPlayerRef.current, options, () => {
+
+        player.controlBar.removeChild('fullscreenToggle');
+        player.controlBar.addChild('QualitySelector');
+        player.controlBar.addChild('fullscreenToggle');
+
+        // player.buffered(3)
+        player.src([{
+          src: src[0],
+          label: '360p',
+          // type: 'video/mp4',
+          selected: true,
+        },
+        {
+          src: src[1],
+          // type: 'video/mp4',
+          label: '480p',
+
+        },
+          // {
+          // src:"https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4",
+          // // type: 'video/mp4',
+          // label: '720p',
+          // }
+        ]);
+
+        //store current time when video is played 
+        player.on("timeupdate", () => {
+          setCurrentTime(player.currentTime());
+        });
+
+        //start video at a given time
+        // player.currentTime(30);
+
+      }); 
     }
-  }, [src]);
-  // console.log(videoRef)
-  return videoRef;
-};
-
-const VideoPlayer = ({ src, controls, autoplay, options }) => {
-  const playerRef = usePlayer({ src, controls, autoplay, options });
-
+    return () => { };
+  }, []);
+  document.cookie = "time=" + currentTime;
+  console.log(currentTime);
   return (
-    <div data-vjs-player>
-      <video ref={playerRef} className="video-js" />
+    <div style={{ width: "100%", height: "100%" }}>
+      <video style={{ width: "100%", height: "100%", display: "block" }} ref={videoPlayerRef} className="video-js" />
     </div>
   );
 };
-
-
-VideoPlayer.propTypes = {
-  src: PropTypes.string.isRequired,
-  controls: PropTypes.bool,
-  autoplay: PropTypes.bool,
-  options: PropTypes.bool
-};
-
-VideoPlayer.defaultProps = {
-  controls: true,
-  autoplay: false,
-  options: true
-};
-
-export default VideoPlayer;
-
