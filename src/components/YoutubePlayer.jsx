@@ -7,10 +7,10 @@ class YouTubeVideo extends React.PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
   };
-
+  
   componentDidMount = () => {
     // On mount, check to see if the API script is already loaded
-
+  
     if (!window.YT) { // If not, load the script asynchronously
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
@@ -20,33 +20,33 @@ class YouTubeVideo extends React.PureComponent {
 
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+        
     } else { // If script is already there, load the video directly
-      this.loadVideo();
+      this.loadVideo();    
     }
   };
 
   loadVideo = () => {
     const { id } = this.props;
-
     // the Player object is created uniquely based on the id in props
     this.player = new window.YT.Player(`youtube-player-${id}`, {
       videoId: id,
       events: {
         onReady: this.onPlayerReady,
       },
-    });
+    })
   };
 
   onPlayerReady = event => {
     event.target.playVideo();
+    
   };
 
   render = () => {
     const { id } = this.props;
     return (
       <div className="container" style={{ position:'relative'}}>
-        <div id={`youtube-player-${id}`} style={{height: '750px', width: '100%'}} />
+        <div id={`youtube-player-${id}`} style={{height: '650px', width: '100%'}} />
       </div>
     );
   };

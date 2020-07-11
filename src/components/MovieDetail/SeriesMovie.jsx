@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import DetailCard from "../DetailCard";
 // import Accordion from "./Accordion";
-import VideoPlayer from "../VideoPlayer";
-import YouTubeVideo from "../YoutubePlayer";
+// import VideoPlayer from "../VideoPlayer";
+// import YouTubeVideo from "../YoutubePlayer";
 import axios from "axios";
 import { serverPath } from "../../constants/const";
 import Iframe from 'react-iframe'
+// import Frame from 'react-frame-component';
 
 const apiPath = `${serverPath}/api`;
 
@@ -28,7 +29,7 @@ function SeriesMovie({ movie = [], link, episodes }) {
       .get(`${apiPath}/episode/?episodeId=1&movieId=${movie.id}`)
       .then((res) => {
         setDataList(res.data.sources);
-        
+
         let sources = res.data.sources.map((item) => item.src)
         setSoucreVideo(sources);
       });
@@ -43,7 +44,9 @@ function SeriesMovie({ movie = [], link, episodes }) {
         setSoucreVideo(sources);
       });
   }
-
+  // function createMarkup() {
+  //   return { __html: '<iframe width="640" height="360" src="https://playhydrax.com/?v=RAYFYzaJB" frameborder="0" scrolling="0" allowfullscreen></iframe>' };
+  // }
   return (
     <section className="section details">
       {/* <!-- details background --> */}
@@ -54,14 +57,15 @@ function SeriesMovie({ movie = [], link, episodes }) {
           <DetailCard single={false} movie={movie} />
           <div className="col-12 ">
             {/* <VideoPlayer src={soucreVideo} /> */}
-            {/* <Iframe url="https://lotus.vn/w/embed/post/731183825759215616.htm"
-        width="450px"
-        height="450px"
+            <Iframe url="https://playhydrax.com/?v=RAYFYzaJB"
+        width="100%"
+        height="650px"
         id="myId"
         className="myClassname"
         display="initial"
-        position="relative"/> */}
-        <YouTubeVideo id='FwQE6yGINKs'/>
+        position="relative"/>
+            {/* <div dangerouslySetInnerHTML={createMarkup()} />; */}
+        {/* <YouTubeVideo id='FwQE6yGINKs'/> */}
           </div>
           <div className="col-12">
             <div
@@ -85,6 +89,7 @@ function SeriesMovie({ movie = [], link, episodes }) {
                         marginRight: "15px",
                         marginLeft: "15px",
                       }}
+
                     >
                       {list.server}
                     </button>
