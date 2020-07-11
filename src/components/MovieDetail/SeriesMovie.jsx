@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import PlyrPlayer from "../../PlyrPlayer";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import DetailCard from "../DetailCard";
-import Accordion from "./Accordion";
+// import Accordion from "./Accordion";
 import VideoPlayer from "../VideoPlayer";
+import YouTubeVideo from "../YoutubePlayer";
+import axios from "axios";
+import { serverPath } from "../../constants/const";
+import Iframe from 'react-iframe'
 
-function SeriesMovie({ movies=[],link }) {
-  let rs=[]
-  link.sources.map(item=>{
-    rs.push(
-      item.src
-    )
-      // console.log(item.src)
-      // type: "video/mp4",
-})
+const apiPath = `${serverPath}/api`;
+
+function SeriesMovie({ movie = [], link, episodes }) {
+  const [dataList, setDataList] = useState([
+    {
+      id: 1,
+      label: "mp4",
+      resolution: null,
+      server: "",
+      src: "",
+    },
+  ]);
+  const [soucreVideo, setSoucreVideo] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${apiPath}/episode/?episodeId=1&movieId=${movie.id}`)
+      .then((res) => {
+        setDataList(res.data.sources);
+        
+        let sources = res.data.sources.map((item) => item.src)
+        setSoucreVideo(sources);
+      });
+  }, [episodes, movie]);
+
+  function handleEpisodeClick(episodeId, movieId) {
+    axios
+      .get(`${apiPath}/episode/?episodeId=${episodeId}&movieId=${movieId}`)
+      .then((res) => {
+        setDataList(res.data.sources);
+        let sources = res.data.sources.map((item) => item.src)
+        setSoucreVideo(sources);
+      });
+  }
+
   return (
     <section className="section details">
       {/* <!-- details background --> */}
@@ -21,73 +51,85 @@ function SeriesMovie({ movies=[],link }) {
       {/* <!-- end details background --> */}
       <div className="container">
         <Row>
-          <DetailCard single={false} movie={movies} />
-          {/* <!-- player --> */}
-          <div className="col-12 col-xl-6">
-            {/* <PlyrPlayer /> */}
-            <VideoPlayer src={rs}/> 
+          <DetailCard single={false} movie={movie} />
+          <div className="col-12 ">
+            {/* <VideoPlayer src={soucreVideo} /> */}
+            {/* <Iframe url="https://lotus.vn/w/embed/post/731183825759215616.htm"
+        width="450px"
+        height="450px"
+        id="myId"
+        className="myClassname"
+        display="initial"
+        position="relative"/> */}
+        <YouTubeVideo id='FwQE6yGINKs'/>
           </div>
-          {/* <!-- end player --> */}
-
-          <Accordion />
+          <div className="col-12">
+            <div
+              className="details__share"
+              style={{ flexDirection: "row", display: "flex" }}
+            >
+              <span
+                className="details__share-title"
+                style={{ paddingTop: "35px" }}
+              >
+                Servers:
+              </span>
+              {dataList.length > 0 &&
+                dataList.map((list) => {
+                  return (
+                    <button
+                      type="button"
+                      className="form__btn"
+                      style={{
+                        width: "100px",
+                        marginRight: "15px",
+                        marginLeft: "15px",
+                      }}
+                    >
+                      {list.server}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
           <div className="col-12">
             <div className="details__wrap">
               {/* <!-- availables --> */}
-              <div className="details__devices">
-                <span className="details__devices-title">
-                  Available on devices:
-                </span>
-                <ul className="details__devices-list">
-                  <li>
-                    <i className="icon ion-logo-apple"></i>
-                    <span>IOS</span>
-                  </li>
-                  <li>
-                    <i className="icon ion-logo-android"></i>
-                    <span>Android</span>
-                  </li>
-                  <li>
-                    <i className="icon ion-logo-windows"></i>
-                    <span>Windows</span>
-                  </li>
-                  <li>
-                    <i className="icon ion-md-tv"></i>
-                    <span>Smart TV</span>
-                  </li>
-                </ul>
-              </div>
-              {/* <!-- end availables --> */}
-
-              {/* <!-- share --> */}
-              <div className="details__share">
-                <span className="details__share-title">
-                  Share with friends:
+              <div
+                className="details__devices"
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  flexWrap: "wrap",
+                }}
+              >
+                <span
+                  className="details__devices-title"
+                  style={{ paddingTop: "35px" }}
+                >
+                  Tập phim:
                 </span>
 
-                <ul className="details__share-list">
-                  <li className="facebook">
-                    <a href="#">
-                      <i className="icon ion-logo-facebook"></i>
-                    </a>
-                  </li>
-                  <li className="instagram">
-                    <a href="#">
-                      <i className="icon ion-logo-instagram"></i>
-                    </a>
-                  </li>
-                  <li className="twitter">
-                    <a href="#">
-                      <i className="icon ion-logo-twitter"></i>
-                    </a>
-                  </li>
-                  <li className="vk">
-                    <a href="#">
-                      <i className="icon ion-logo-vk"></i>
-                    </a>
-                  </li>
-                </ul>
+                {episodes.length > 0 &&
+                  episodes.map((list) => {
+                    return (
+                      <button
+                        type="button"
+                        className="form__btn"
+                        style={{
+                          width: "50px",
+                          marginRight: "15px",
+                          marginLeft: "15px",
+                        }}
+                        onClick={() =>
+                          handleEpisodeClick(list.episode_id, list.movie_id)
+                        }
+                      >
+                        {list.episode_id}
+                      </button>
+                    );
+                  })}
               </div>
-              {/* <!-- end share --> */}
             </div>
           </div>
         </Row>

@@ -16,23 +16,34 @@ const apiPath = `${serverPath}/api`;
 function MoveDetailPage(props) {
   // console.log(props)
   const [movie, setMovie] = useState([]);
-
+  const [episodeList, setEpisodeList] = useState([{
+    sources: [],
+    episode_id: 0,
+    movie_id: 0
+  }]);
   useEffect(() => {
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    episodeData();
   }, []);
 
   function fetchData() {
   axios.get(`${apiPath}/movie/${props.match.params.id}`)
       .then(res =>
-        setMovie(res.data)
+        setMovie(res.data.result)
       )
-    // console.log(setMovies)
+  }
+  function episodeData() {
+    axios.get(`${apiPath}/episode/${props.match.params.id}`)
+    .then(res => setEpisodeList(res.data))
   }
   // console.log(movieLink.sources)
   return (
     <React.Fragment>
       {/* <SingleMovie movie={movie} /> */}
-      <SeriesMovie movies={movie} link ={movieLink}/>
+      <SeriesMovie movie={movie} link ={movieLink} episodes ={episodeList} />
       {/* <TabsContainer commentList={comments} sideCards={detailList} /> */}
       <Tabs activeTab="Comments">
         <TabItem label="Comments">

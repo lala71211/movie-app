@@ -6,6 +6,7 @@ import DetailList from "../components/DetailList";
 // import { detailList, gridList, SimpleCards, movie } from "../../data";
 import { serverPath } from "../constants/const";
 import axios from "axios";
+import { data } from "jquery";
 
 const apiPath = `${serverPath}/api`
 function HomePage(props) {
@@ -17,7 +18,7 @@ function HomePage(props) {
   function fetchData() {
     axios.get(`${apiPath}/movie/?pageSize=6&currentPage=1`)
       .then(res => res.data)
-      .then(data => setMovies(data.content));
+      .then(data => setMovies(data.result.content));
   }
   return (
     <React.Fragment>

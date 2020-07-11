@@ -15,6 +15,7 @@ export default function VideoPlayer({ src }) {
     controls: true,
     userActions: { hotkeys: true },
     playbackRates: [0.5, 1, 1.5, 2],
+    fluid:true
   };
 
   videojs.getComponent('ControlBar').prototype.options_ = {
@@ -47,7 +48,7 @@ export default function VideoPlayer({ src }) {
         player.controlBar.removeChild('fullscreenToggle');
         player.controlBar.addChild('QualitySelector');
         player.controlBar.addChild('fullscreenToggle');
-
+        console.log(src)
         // player.buffered(3)
         player.src([{
           src: src[0],
@@ -57,7 +58,7 @@ export default function VideoPlayer({ src }) {
         },
         {
           src: src[1],
-          // type: 'video/mp4',
+          type: 'video/mp4',
           label: '480p',
 
         },
@@ -67,24 +68,27 @@ export default function VideoPlayer({ src }) {
           // label: '720p',
           // }
         ]);
-
+      
         //store current time when video is played 
         player.on("timeupdate", () => {
           setCurrentTime(player.currentTime());
         });
-
+        player.buffered(30);
         //start video at a given time
         // player.currentTime(30);
 
       }); 
+      player.responsive(true);
     }
+    
     return () => { };
-  }, []);
+  }, [src]);
+
   document.cookie = "time=" + currentTime;
-  console.log(currentTime);
+  // console.log(currentTime);
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <video style={{ width: "100%", height: "100%", display: "block" }} ref={videoPlayerRef} className="video-js" />
-    </div>
+    <React.Fragment>
+      <video  ref={videoPlayerRef} className="video-js" />
+    </React.Fragment>
   );
 };
