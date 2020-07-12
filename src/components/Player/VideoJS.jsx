@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import { Cookies } from 'react-cookie';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
-import '../assets/css/video.css';
-// import { instanceOf } from 'prop-types';
-// import PropTypes from "prop-types";
+import '../../assets/css/video.css';
+
 export default function VideoPlayer({ src }) {
   require('silvermine-videojs-quality-selector')(videojs);
 
@@ -48,12 +46,11 @@ export default function VideoPlayer({ src }) {
         player.controlBar.removeChild('fullscreenToggle');
         player.controlBar.addChild('QualitySelector');
         player.controlBar.addChild('fullscreenToggle');
-        console.log(src)
         // player.buffered(3)
         player.src([{
           src: src[0],
           label: '360p',
-          // type: 'video/mp4',
+          type: 'video/mp4',
           selected: true,
         },
         {
@@ -62,11 +59,6 @@ export default function VideoPlayer({ src }) {
           label: '480p',
 
         },
-          // {
-          // src:"https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4",
-          // // type: 'video/mp4',
-          // label: '720p',
-          // }
         ]);
       
         //store current time when video is played 
@@ -81,7 +73,8 @@ export default function VideoPlayer({ src }) {
       player.responsive(true);
     }
     
-    return () => { };
+    return () => {
+     };
   }, [src]);
 
   document.cookie = "time=" + currentTime;

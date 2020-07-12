@@ -7,7 +7,7 @@ import ReviewList from "../components/ReviewList";
 import { Tabs, TabItem } from "../components/CustomTabs";
 import Comment from "../components/Comment"
 import Gallery from "../components/TabsContainer/Gallery"
-import { serverPath } from "../constants/const";
+import { serverPath, } from "../constants/const";
 import axios from "axios";
 
 const apiPath = `${serverPath}/api`;

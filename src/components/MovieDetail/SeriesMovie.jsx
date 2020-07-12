@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 // import PlyrPlayer from "../../PlyrPlayer";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import DetailCard from "../DetailCard";
 // import Accordion from "./Accordion";
-// import VideoPlayer from "../VideoPlayer";
-// import YouTubeVideo from "../YoutubePlayer";
+// import VideoPlayer from "../Player/VideoJS";
+import YouTubeVideo from "../Player/YoutubePlayer";
 import axios from "axios";
-import { serverPath } from "../../constants/const";
-import Iframe from 'react-iframe'
+import { serverPath} from "../../constants/const";
+import Player from "../Player/index";
+import VideoPlayer from "../Player/VideoJS";
+// import Iframe from 'react-iframe'
 // import Frame from 'react-frame-component';
 
 const apiPath = `${serverPath}/api`;
 
+
 function SeriesMovie({ movie = [], link, episodes }) {
+  
   const [dataList, setDataList] = useState([
     {
       id: 1,
@@ -21,32 +25,70 @@ function SeriesMovie({ movie = [], link, episodes }) {
       server: "",
       src: "",
     },
+    {
+      id: 2,
+      label: "mp4",
+      resolution: null,
+      server: "",
+      src: "",
+    },{
+      id: 3,
+      label: "mp4",
+      resolution: null,
+      server: "",
+      src: "",
+    },
   ]);
+  const [labelServer,setLabelServer] = useState([]);
   const [soucreVideo, setSoucreVideo] = useState([]);
+  const [activeLabel, setActiveLabel] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${apiPath}/episode/?episodeId=1&movieId=${movie.id}`)
-      .then((res) => {
-        setDataList(res.data.sources);
-
-        let sources = res.data.sources.map((item) => item.src)
-        setSoucreVideo(sources);
-      });
+    handleEpisodeClick(1,movie.id)
   }, [episodes, movie]);
+
+  useEffect(() => {
+    let linkVideo = dataList.filter(function(item) {
+      return item.server === activeLabel
+   });
+   let rs = [];
+   linkVideo.map(item => rs.push(item.src));
+   console.log(rs)
+   setSoucreVideo(rs); 
+  },[activeLabel])
+
+  
 
   function handleEpisodeClick(episodeId, movieId) {
     axios
       .get(`${apiPath}/episode/?episodeId=${episodeId}&movieId=${movieId}`)
       .then((res) => {
-        setDataList(res.data.sources);
-        let sources = res.data.sources.map((item) => item.src)
-        setSoucreVideo(sources);
+        let filterServerLabel = []
+        let temp = res.data.sources
+        temp.forEach(item => {
+          if(!filterServerLabel.includes(item.server)){
+            filterServerLabel.push(item.server)
+          }
+        });
+        setDataList(temp);
+        setActiveLabel(filterServerLabel[0])
+        setLabelServer(filterServerLabel)
       });
   }
+ 
+  function getLinkByServer(serverL,dataList) {
+      let linkVideo = dataList.filter(function(item) {
+         return item.server === serverL
+      });
+      let rs = [];
+      linkVideo.map(item => rs.push(item.src));
+      setSoucreVideo(rs);
+  }
+
   // function createMarkup() {
   //   return { __html: '<iframe width="640" height="360" src="https://playhydrax.com/?v=RAYFYzaJB" frameborder="0" scrolling="0" allowfullscreen></iframe>' };
   // }
+  let src = ["WZHRAKVX84o","http://pzc.phimmoizz.net/embed/36d6a3c6f2af703dc1f70f1a6d07d3a3","http://pzc.phimmoizz.net/embed/c2902b186bb214f76562d78f286b2002"]
   return (
     <section className="section details">
       {/* <!-- details background --> */}
@@ -56,16 +98,24 @@ function SeriesMovie({ movie = [], link, episodes }) {
         <Row>
           <DetailCard single={false} movie={movie} />
           <div className="col-12 ">
-            {/* <VideoPlayer src={soucreVideo} /> */}
-            <Iframe url="https://playhydrax.com/?v=RAYFYzaJB"
+            {/* { if (activeLabel===SERVERNAME.YOUTUBE){
+              <YouTubeVideo id='FwQE6yGINKs'/> 
+            }} */}
+            {/* <VideoPlayer src={src} /> */}
+            {/* <Iframe url={src[1]}
         width="100%"
         height="650px"
-        id="myId"
+        id="LyQuangMinh"
         className="myClassname"
         display="initial"
-        position="relative"/>
-            {/* <div dangerouslySetInnerHTML={createMarkup()} />; */}
-        {/* <YouTubeVideo id='FwQE6yGINKs'/> */}
+        position="relative"
+        allow="fullscreen"/> */}
+        {/* <YouTubeVideo id='jWsHrfK_2-Q'/> */}
+{/* {
+
+  activeLabel===SERVERNAME.GGDRIVE? <VideoPlayer/>:
+} */}
+        <Player src={soucreVideo} serverName={activeLabel}/>
           </div>
           <div className="col-12">
             <div
@@ -78,8 +128,8 @@ function SeriesMovie({ movie = [], link, episodes }) {
               >
                 Servers:
               </span>
-              {dataList.length > 0 &&
-                dataList.map((list) => {
+              {labelServer.length > 0 &&
+                labelServer.map((item) => {
                   return (
                     <button
                       type="button"
@@ -89,9 +139,9 @@ function SeriesMovie({ movie = [], link, episodes }) {
                         marginRight: "15px",
                         marginLeft: "15px",
                       }}
-
+                       onClick={()=>setActiveLabel(item)}
                     >
-                      {list.server}
+                      {item}
                     </button>
                   );
                 })}
