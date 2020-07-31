@@ -4,7 +4,7 @@ import VideoPlayer from "./VideoJS";
 import YouTubeVideo from "./YoutubePlayer";
 import Iframe from 'react-iframe'
 
-const Player = React.useCallback(({ src, serverName }) => {
+const Player = (({ src, serverName }) => {
     switch (serverName) {
         case SERVERNAME.GGDRIVE:
             return <VideoPlayer src={src} />;

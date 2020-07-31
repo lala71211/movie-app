@@ -1,67 +1,77 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // import TabsContainer from "../../components/TabsContainer/test";
-import { comments,  movie as movieLink } from "../data";
-import {  SeriesMovie } from "../components/MovieDetail";
+// import {  movie as movieLink } from "../data";
+import { SeriesMovie } from "../components/MovieDetail";
 import CommentList from "../components/CommentList"
 import ReviewList from "../components/ReviewList";
 import { Tabs, TabItem } from "../components/CustomTabs";
 import Comment from "../components/Comment"
 import Gallery from "../components/TabsContainer/Gallery"
-import { serverPath, } from "../constants/const";
-import axios from "axios";
 
-const apiPath = `${serverPath}/api`;
+import { getMovieByID } from "../redux/movie/actions";
+import { getListComments } from "../redux/comment/actions";
+import { getListReviews } from "../redux/review/actions";
+import { getListEpisodes } from "../redux/episode/actions";
+
+import { connect } from "react-redux";
+
 
 
 function MoveDetailPage(props) {
-  // console.log(props)
-  const [movie, setMovie] = useState([]);
-  const [episodeList, setEpisodeList] = useState([{
-    sources: [],
-    episode_id: 0,
-    movie_id: 0
-  }]);
+
+  const movieId = props.match.params.id;
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    episodeData();
-  }, []);
-
   function fetchData() {
-  axios.get(`${apiPath}/movie/${props.match.params.id}`)
-      .then(res =>
-        setMovie(res.data.result)
-      )
+
+    props.getMovieByID(movieId)
+    props.getListComments(6, 0, movieId, -1);
+    props.getListReviews(6, 0, movieId, -1);
+    props.getListEpisodes(movieId);
+
   }
-  function episodeData() {
-    axios.get(`${apiPath}/episode/${props.match.params.id}`)
-    .then(res => setEpisodeList(res.data))
-  }
-  // console.log(movieLink.sources)
+ 
+  const { comments, reviews } = props; 
   return (
     <React.Fragment>
       {/* <SingleMovie movie={movie} /> */}
-      <SeriesMovie movie={movie} link ={movieLink} episodes ={episodeList} />
+      <SeriesMovie />
       {/* <TabsContainer commentList={comments} sideCards={detailList} /> */}
       <Tabs activeTab="Comments">
         <TabItem label="Comments">
-          <CommentList>
+          <CommentList movieId={movieId}>
             {comments.map((comment) => {
               return <Comment {...comment} key={comment.id} />;
-            })}
+            })} 
           </CommentList>
         </TabItem>
         <TabItem label="Review">
-          <ReviewList></ReviewList>
+          <ReviewList movieId={movieId} reviews={reviews}/>
         </TabItem>
         <TabItem label="Photo">
-          <Gallery ></Gallery>
+          <Gallery />
         </TabItem>
       </Tabs>
     </React.Fragment>
   );
 }
 
-export default MoveDetailPage;
+const mapStateToProps = ({ movieData, commentData, episodeData, reviewData }) => {
+  const { movie } = movieData;
+  const { episodes } = episodeData;
+  const { comments } = commentData;
+  const { reviews } = reviewData;
+  return { movie, episodes, comments, reviews };
+};
+export default connect(
+  mapStateToProps,
+  {
+    getMovieByID,
+    getListComments,
+    getListReviews,
+    getListEpisodes
+  }
+)(MoveDetailPage);

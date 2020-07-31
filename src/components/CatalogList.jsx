@@ -1,42 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DetailList from "../components/DetailList";
+// import Paginator from "../components/Paginator";
+import Pagination from '../components/Pagination';
 
+import { getMovieByGenre } from "../redux/movie/actions";
+import { connect } from "react-redux";
 
-function CatalogList({ movieList }) {
+function CatalogList(props ) {
+  const [currentPage, setCurrentPage] = useState(1)
+  // console.log(props)
+  useEffect(() => {
+    fetchData(1);
+  }, []);
+
+  function fetchData(currentPage) {
+    props.getMovieByGenre(2, currentPage)
+  }
+  function onChangePage(page) {
+    setCurrentPage(page);
+    fetchData(page-1)
+  }
+  // };
+  const { movieByGenre,totalPages } = props;
+  console.log(totalPages)
   return (
     <div className="catalog">
       <div className="container">
-        <DetailList movieList={movieList} />
-
-        <div class="col-12">
-          <ul class="paginator paginator--list">
-            <li class="paginator__item paginator__item--prev">
-              <a href="#">
-                <i class="icon ion-ios-arrow-back"></i>
-              </a>
-            </li>
-            <li class="paginator__item">
-              <a href="#">1</a>
-            </li>
-            <li class="paginator__item paginator__item--active">
-              <a href="#">2</a>
-            </li>
-            <li class="paginator__item">
-              <a href="#">3</a>
-            </li>
-            <li class="paginator__item">
-              <a href="#">4</a>
-            </li>
-            <li class="paginator__item paginator__item--next">
-              <a href="#">
-                <i class="icon ion-ios-arrow-forward"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <DetailList movieList={movieByGenre} />
+        <Pagination
+          currentPage={currentPage}
+          totalPage={totalPages}
+          onChangePage={i => onChangePage(i)}
+        />
       </div>
     </div>
   );
 }
+const mapStateToProps = ({ movieData }) => {
 
-export default CatalogList;
+  const { movieByGenre, totalPages } = movieData;
+  return { movieByGenre,totalPages };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    getMovieByGenre
+  }
+)(CatalogList);
+// export default CatalogList;

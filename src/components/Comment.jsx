@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-function Comment({ avt, username, time, content, like, dislike, answer }) {
+function Comment({ avatar, username, time, content, like, dislike, answer }) {
   let commentClass = classNames({
     comments__item: true,
     "comments__item--answer": answer,
@@ -11,7 +11,7 @@ function Comment({ avt, username, time, content, like, dislike, answer }) {
   return (
     <li class={commentClass}>
       <div class="comments__autor">
-        <img class="comments__avatar" src={avt} alt="" />
+        <img class="comments__avatar" src={avatar} alt="" />
         <span class="comments__name">{username}</span>
         <span class="comments__time">{time}</span>
       </div>

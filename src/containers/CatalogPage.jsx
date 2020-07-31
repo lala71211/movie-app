@@ -1,53 +1,55 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect} from "react";
 import PageTitle from "../components/PageTitle";
 import FilterMovie from "../components/FilterMovie";
 
 import {
-  // genres as genreList,
   qualities as qualityList,
-  // detailList,
 } from "../data";
 import CatalogList from "../components/CatalogList";
-import { serverPath } from "../constants/const";
-
-const apiPath = `${serverPath}/api`
+import { getListGenres } from "../redux/genre/actions";
+import { getListMovies, getMovieByGenre } from "../redux/movie/actions";
+import { connect } from "react-redux";
 
 function CatalogPage(props) {
-  const [genres, setGenres] = useState([]);
-  const [movies, setMovies] = useState([]);
-  // console.log(props);
+
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log("abc")
 
-  function searchMovie(searchTerm){
+
+  function searchMovie(searchTerm) {
     // axios.get(`${apiPath/movie/advanced?=}`)
     console.log(searchTerm)
   }
 
- function fetchData(){
-  // const genreResponse = await axios.get(`${apiPath}/genre/`);
-  axios.get(`${apiPath}/movie/?pageSize=6&currentPage=1`)
-  .then(res => res.data)
-  .then(data=>setMovies(data.content));
-  
-  axios.get(`${apiPath}/genre/`)
-  .then(res=>res.data)
-  .then(data=>setGenres(data.content));
-  // setGenres(genreResponse.content);
-  // setMovies(movieResponse.content);
-}
+  function fetchData() {
+      props.getListGenres("","");
+      // props.getListMovies(6,1,"","")
+      props.getMovieByGenre(2,0)
+  }
+  const {genres,movieByGenre} = props;
+
   return (
     <React.Fragment>
       <PageTitle title="Tìm Kiếm" location="Tìm Kiếm" />
-      <FilterMovie qualities={qualityList} genreList={genres} onSearch={searchMovie}/>
-      <CatalogList movieList={movies} />
+      <FilterMovie qualities={qualityList} genreList={genres} onSearch={searchMovie} />
+      <CatalogList  />
     </React.Fragment>
   );
 }
 
 CatalogPage.propTypes = {};
+const mapStateToProps = ({ genreData, movieData }) => {
+  const { genres } = genreData;
+  const { movieByGenre } = movieData;
+  return { genres, movieByGenre };
+};
 
-export default CatalogPage;
+export default connect(
+  mapStateToProps,
+  {
+    getListGenres,
+    getListMovies,
+    getMovieByGenre
+  }
+)(CatalogPage);

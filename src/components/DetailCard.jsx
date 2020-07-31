@@ -4,7 +4,7 @@ import { storage } from "../constants/firebase";
 
 DetailCard.defaultProps = {
   movie:{
-    adults: 0,
+    adult: 0,
     genres: [],
     imdb: 0,
     languages: "",
