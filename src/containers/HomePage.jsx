@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import HomeCarousel from "../components/HomeCarousel";
 import { TabItem, Tabs } from "../components/CustomTabs";
 import GridList from "../components/GridList";
 import DetailList from "../components/DetailList";
 // import { detailList, gridList, SimpleCards, movie } from "../../data";
-import { serverPath } from "../constants/const";
-import axios from "axios";
+import { getListMovies } from "../redux/movie/actions";
+import { connect } from "react-redux";
 
-const apiPath = `${serverPath}/api`
 function HomePage(props) {
-  const [movies, setMovies] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
 
   function fetchData() {
-    axios.get(`${apiPath}/movie/?pageSize=6&currentPage=1`)
-      .then(res => res.data)
-      .then(data => setMovies(data.content));
+    props.getListMovies(6,1,"","")
   }
+  const {movies} = props;
   return (
     <React.Fragment>
       <HomeCarousel movies={movies} />
@@ -41,5 +38,14 @@ function HomePage(props) {
 }
 
 HomePage.propTypes = {};
+const mapStateToProps = ({  movieData }) => {
+  const { movies } = movieData;
+  return { movies };
+};
 
-export default HomePage;
+export default connect(
+  mapStateToProps,
+  {
+    getListMovies
+  }
+)(HomePage);

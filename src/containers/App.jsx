@@ -11,11 +11,13 @@ import MoveDetailPage from "./MovieDetailPage";
 import HomePage from "./HomePage";
 import CatalogPage from "./CatalogPage";
 
+import { connect } from 'react-redux';
 
 import "../assets/css/bootstrap-reboot.min.css";
 import "../assets/css/bootstrap-grid.min.css";
 import "../assets/css/ionicons.min.css";
 import "../assets/css/main.css";
+
 
 function App() {
   return (
@@ -56,5 +58,11 @@ function App() {
     </React.Fragment>
   );
 }
+const mapStateToProps = () => {
+};
+const mapActionsToProps = {};
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(App);

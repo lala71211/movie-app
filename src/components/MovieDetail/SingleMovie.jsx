@@ -3,7 +3,7 @@ import React from "react";
 import DetailCard from "../DetailCard";
 import { Col, Row } from "react-bootstrap";
 // import Plyr from 'react-plyr';
-import VideoPlayer from "../VideoPlayer";
+import VideoPlayer from "../Player/VideoJS";
 
 function SingleMovie({ movie }) {
   // console.log(movie.sources);
