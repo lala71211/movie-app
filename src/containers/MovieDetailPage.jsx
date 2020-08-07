@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 // import TabsContainer from "../../components/TabsContainer/test";
 // import {  movie as movieLink } from "../data";
 import { SeriesMovie } from "../components/MovieDetail";
@@ -21,6 +21,7 @@ function MoveDetailPage(props) {
 
   const movieId = props.match.params.id;
 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -38,6 +39,7 @@ function MoveDetailPage(props) {
   return (
     <React.Fragment>
       {/* <SingleMovie movie={movie} /> */}
+  
       <SeriesMovie />
       {/* <TabsContainer commentList={comments} sideCards={detailList} /> */}
       <Tabs activeTab="Comments">

@@ -71,7 +71,7 @@ function DetailCard({ movie }) {
           <div className="card__cover">
             <img className="avatar" alt="" ref={refImage} />
             <Link to={{
-              pathname: `/movie/${movie.id}/dadas`,
+              pathname: `/movie/${movie.id}/`,
               search: "?search=25"
             }}
               className="card__play">
